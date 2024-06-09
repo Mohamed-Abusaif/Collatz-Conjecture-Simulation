@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Collatz Conjecture Simulation!</title>
+  </head>
+  <body>
+    <form name="myForm" onsubmit="return processingInput()">
+      <label for="integer"
+        >Please Enter any Integer Number You Can Think Of:</label
+      >
+      <input type="number" id="integer" name="integer" /><br /><br />
+      <input type="submit" value="Submit" />
+    </form>
+
+    <h3>Result: <span id="result"></span></h3>
+    <h3>Total Number of Steps to Reach (1): <span id="count"></span></h3>
+
+    <script type="text/javascript" src="algorithm.js"></script>
+  </body>
+</html>
