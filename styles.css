@@ -1,0 +1,47 @@
+body {
+    display: block;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    margin: 0;
+  }
+  .container {
+    max-width: 600px;
+    display: block;
+    margin: auto;
+    margin-top: 100px;
+    border: 5px solid #0d6efd;
+    border-radius: 25px;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .form-group {
+    margin-bottom: 20px;
+  }
+
+  #integer {
+    width: 200px;
+  }
+
+  #result,
+  #count {
+    text-align: center;
+    font-weight: bold;
+    font-size: 20px;
+  }
+  #resultH,
+  #countH {
+    text-align: center;
+    color: #0d6efd;
+  }
+
+  .btn-primary {
+    display: block;
+    margin: 0 auto;
+  }
+  #chart {
+    max-width: 600px;
+    margin: auto;
+    margin-top: 50px;
+  }

@@ -3,27 +3,43 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
+    <title>Collatz Conjecture Simulation!</title>
     <link
       href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
       rel="stylesheet"
     />
-
-    <title>Collatz Conjecture Simulation!</title>
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <form name="input" onsubmit="return returnOutput()">
-      <label for="integer"
-        >Please Enter any Integer Number You Can Think Of:</label
-      >
-      <input type="number" id="integer" name="integer" /><br /><br />
-      <input type="submit" value="Submit" />
-    </form>
+    <div class="container">
+      <h1 class="text-center mb-4">Collatz Conjecture Simulation!</h1>
+      <form name="input" onsubmit="return returnOutput()">
+        <div class="form-group row justify-content-center">
+          <label for="integer" class="col-auto"
+            >Please Enter any Integer Number You Can Think Of:</label
+          >
+          <div class="col-auto">
+            <input
+              type="number"
+              id="integer"
+              name="integer"
+              class="form-control"
+            />
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+      </form>
 
-    <h3>Result: <span id="result"></span></h3>
-    <h3>Total Number of Steps to Reach (1): <span id="count"></span></h3>
+      <div class="mb-4">
+        <h3 id="resultH">Result:</h3>
+        <div id="result"></div>
+        <h3 id="countH">Total Number of Steps to Reach (1):</h3>
+        <div id="count"></div>
+      </div>
+    </div>
 
     <div id="chart"></div>
+
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <script type="text/javascript" src="algorithm.js"></script>
     <script src="visualization.js"></script>
