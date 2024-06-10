@@ -4,13 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <script src="p5.js/libraries/p5.min.js"></script>
-    <script src="p5.js/libraries/p5.sound.min.js"></script>
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
 
     <title>Collatz Conjecture Simulation!</title>
   </head>
   <body>
-    <form name="myForm" onsubmit="return processingInput()">
+    <form name="input" onsubmit="return returnOutput()">
       <label for="integer"
         >Please Enter any Integer Number You Can Think Of:</label
       >
@@ -21,7 +23,9 @@
     <h3>Result: <span id="result"></span></h3>
     <h3>Total Number of Steps to Reach (1): <span id="count"></span></h3>
 
+    <div id="chart"></div>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <script type="text/javascript" src="algorithm.js"></script>
-    <script src="p5.js/sketch.js"></script>
+    <script src="visualization.js"></script>
   </body>
 </html>

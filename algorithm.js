@@ -19,12 +19,12 @@ const collatzConjectureAlgorithm = (int) => {
   return output;
 };
 
-function processingInput() {
+const returnOutput = () => {
   const integerNumber = parseInt(document.getElementById("integer").value);
   const result = collatzConjectureAlgorithm(integerNumber);
 
   document.getElementById("result").innerHTML = result.sequenceItself;
   document.getElementById("count").innerHTML = result.countOfSteps;
-
+  visualize(result.sequenceItself);
   return false;
-}
+};
