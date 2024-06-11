@@ -1,8 +1,8 @@
 const visualize = (result) => {
   // set the dimensions and margins of the graph
   var margin = { top: 10, right: 30, bottom: 30, left: 60 },
-    width = 460 - margin.left - margin.right,
-    height = 400 - margin.top - margin.bottom;
+    width = 560 - margin.left - margin.right,
+    height = 500 - margin.top - margin.bottom;
 
   // append the svg object to the div container
   var svg = d3
@@ -26,7 +26,7 @@ const visualize = (result) => {
     .append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(
-      d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d")) // Format ticks as integers
+      d3.axisBottom(x).ticks(10) // Set the number of ticks as per your preference
     );
 
   // Add Y axis

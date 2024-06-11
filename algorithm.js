@@ -51,11 +51,33 @@ const returnOutput = () => {
 
   document.getElementById("chart").innerHTML = "";
   document.getElementById("result").innerHTML = "";
+  document.getElementById("count").innerHTML = "";
 
   displayResult(result.sequenceItself);
-  document.getElementById("count").innerHTML = result.countOfSteps;
+
+  if (result.countOfSteps >= 70) {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${result.countOfSteps}<br>Heyyyy WATCHOUT!!! This Number Is Reaching (1) <br> with a Crazy Big Number of Steps!<br>😡🐳`;
+    document.getElementById("count").style.color = "red";
+  } else if (result.countOfSteps < 70 && result.countOfSteps >= 50) {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${result.countOfSteps}<br>Soooo, Not that small, But also not a big deal!<br>😏👌🏽`;
+  } else {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${result.countOfSteps}<br>Thank You Sir for giving me such an opportunity <br> to reach (1) with these small number of steps!<br>🥹💗`;
+  }
 
   visualize(result.sequenceItself);
 
+  document.getElementById(
+    "finalResult"
+  ).innerHTML = `⬇️<br>We Started With: ${integerNumber}.<br>
+  The Maximum Number Was: ${Math.max(...result.sequenceItself)}.<br>
+  And Ended With 1.<br>
+  Soooo, How was your journey to reach Number 1?<br>
+  Do you feel weary  or cheery? 🥴🆚😌.`;
   return false;
 };
