@@ -82,5 +82,13 @@ const returnOutput = () => {
   And Ended With 1.<br>
   Soooo, How was your journey to reach Number 1?<br>
   Do you feel weary  or cheery? 🥴🆚😌.`;
+
+  const specificDiv = document.getElementById("finalResult");
+  const position = specificDiv.getBoundingClientRect().top;
+  window.scrollTo({
+    top: position * 2,
+    behavior: "smooth",
+  });
+
   return false;
 };
