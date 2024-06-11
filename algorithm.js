@@ -45,6 +45,24 @@ const displayResult = (sequenceItself) => {
   }
 };
 
+const displayCount = (countOfSteps) => {
+  if (countOfSteps >= 70) {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${countOfSteps}<br>Heyyyy WATCHOUT!!! This Number Is Reaching (1) <br> with a Crazy Big Number of Steps!<br>😡🐳`;
+    document.getElementById("count").style.color = "red";
+  } else if (countOfSteps < 70 && countOfSteps >= 50) {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${countOfSteps}<br>Soooo, Not that small, But also not a big deal!<br>😏👌🏽`;
+  } else {
+    document.getElementById(
+      "count"
+    ).innerHTML = `${countOfSteps}<br>Thank You Sir for giving me such an opportunity <br> to reach (1) with these small number of steps!<br>🥹💗`;
+    document.getElementById("count").style.color = "#0d6efd";
+  }
+};
+
 const returnOutput = () => {
   const integerNumber = parseInt(document.getElementById("integer").value);
   const result = collatzConjectureAlgorithm(integerNumber);
@@ -54,22 +72,7 @@ const returnOutput = () => {
   document.getElementById("count").innerHTML = "";
 
   displayResult(result.sequenceItself);
-
-  if (result.countOfSteps >= 70) {
-    document.getElementById(
-      "count"
-    ).innerHTML = `${result.countOfSteps}<br>Heyyyy WATCHOUT!!! This Number Is Reaching (1) <br> with a Crazy Big Number of Steps!<br>😡🐳`;
-    document.getElementById("count").style.color = "red";
-  } else if (result.countOfSteps < 70 && result.countOfSteps >= 50) {
-    document.getElementById(
-      "count"
-    ).innerHTML = `${result.countOfSteps}<br>Soooo, Not that small, But also not a big deal!<br>😏👌🏽`;
-  } else {
-    document.getElementById(
-      "count"
-    ).innerHTML = `${result.countOfSteps}<br>Thank You Sir for giving me such an opportunity <br> to reach (1) with these small number of steps!<br>🥹💗`;
-  }
-
+  displayCount(result.countOfSteps);
   visualize(result.sequenceItself);
 
   document.getElementById(
