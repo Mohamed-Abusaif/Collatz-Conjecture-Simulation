@@ -1,22 +1,26 @@
 const collatzConjectureAlgorithm = (int) => {
   let count = 0;
   let theSecquence = [];
-  while (int !== 1) {
-    if (int % 2 == 0) {
-      int = int / 2;
-      count++;
-      theSecquence.push(int);
-    } else {
-      int = 3 * int + 1;
-      count++;
-      theSecquence.push(int);
+  if (int < 0) {
+    return false;
+  } else {
+    while (int !== 1) {
+      if (int % 2 == 0) {
+        int = int / 2;
+        count++;
+        theSecquence.push(int);
+      } else {
+        int = 3 * int + 1;
+        count++;
+        theSecquence.push(int);
+      }
     }
+    const output = {
+      countOfSteps: count,
+      sequenceItself: theSecquence,
+    };
+    return output;
   }
-  const output = {
-    countOfSteps: count,
-    sequenceItself: theSecquence,
-  };
-  return output;
 };
 
 const displayResult = (sequenceItself) => {

@@ -1,11 +1,11 @@
 const visualize = (result) => {
   // set the dimensions and margins of the graph
-  var margin = { top: 30, right: 30, bottom: 50, left: 60 },
-    width = 600 - margin.left - margin.right,
+  var margin = { top: 10, right: 30, bottom: 30, left: 60 },
+    width = 460 - margin.left - margin.right,
     height = 400 - margin.top - margin.bottom;
 
   // append the svg object to the div container
-  var Svg = d3
+  var svg = d3
     .select("#chart")
     .append("svg")
     .attr("width", width + margin.left + margin.right)
@@ -13,86 +13,64 @@ const visualize = (result) => {
     .append("g")
     .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-  // Add border
-  Svg.append("rect")
-    .attr("x", -margin.left)
-    .attr("y", -margin.top)
-    .attr("width", width + margin.left + margin.right)
-    .attr("height", height + margin.top + margin.bottom)
-    .style("stroke", "#0d6efd")
-    .style("fill", "none")
-    .style("stroke-width", "5px");
+  // Convert result array into suitable data format
+  const data = result.map((d, i) => ({ step: i, value: d }));
 
   // Add X axis
   var x = d3
     .scaleLinear()
-    .domain([4 * 0.95, 8 * 1.001])
+    .domain([0, data.length - 1])
     .range([0, width]);
-  Svg.append("g")
+
+  svg
+    .append("g")
     .attr("transform", "translate(0," + height + ")")
     .call(
-      d3
-        .axisBottom(x)
-        .tickSize(-height * 1.3)
-        .ticks(10)
-    )
-    .select(".domain")
-    .remove();
+      d3.axisBottom(x).ticks(data.length).tickFormat(d3.format("d")) // Format ticks as integers
+    );
 
   // Add Y axis
   var y = d3
     .scaleLinear()
-    .domain([-0.001, 9 * 1.01])
-    .range([height, 0])
-    .nice();
-  Svg.append("g")
-    .call(
+    .domain([0, d3.max(data, (d) => d.value)])
+    .range([height, 0]);
+
+  svg.append("g").call(d3.axisLeft(y));
+
+  // Add the line
+  svg
+    .append("path")
+    .datum(data)
+    .attr("fill", "none")
+    .attr("stroke", "#69b3a2")
+    .attr("stroke-width", 1.5)
+    .attr(
+      "d",
       d3
-        .axisLeft(y)
-        .tickSize(-width * 1.3)
-        .ticks(7)
-    )
-    .select(".domain")
-    .remove();
+        .line()
+        .x((d) => x(d.step))
+        .y((d) => y(d.value))
+    );
 
-  // Customization
-  Svg.selectAll(".tick line").attr("stroke", "#EBEBEB");
-
-  // Add X axis label:
-  Svg.append("text")
-    .attr("text-anchor", "end")
-    .attr("x", width)
-    .attr("y", height + margin.top + 20)
-    .text("Sepal Length");
-
-  // Y axis label:
-  Svg.append("text")
-    .attr("text-anchor", "end")
-    .attr("transform", "rotate(-90)")
-    .attr("y", -margin.left + 20)
-    .attr("x", -margin.top)
-    .text("Petal Length");
-
-  // Color scale: give me a specie name, I return a color
-  var color = d3
-    .scaleOrdinal()
-    .domain(["setosa", "versicolor", "virginica"])
-    .range(["#402D54", "#D18975", "#8FD175"]);
-
-  // Add dots
-  Svg.append("g")
+  // Add the points
+  svg
+    .append("g")
     .selectAll("dot")
-    .data(result)
+    .data(data)
     .enter()
     .append("circle")
-    .attr("cx", function (d) {
-      return x(d.Sepal_Length);
-    })
-    .attr("cy", function (d) {
-      return y(d.Petal_Length);
-    })
+    .attr("cx", (d) => x(d.step))
+    .attr("cy", (d) => y(d.value))
     .attr("r", 5)
-    .style("fill", function (d) {
-      return color(d.Species);
-    });
+    .attr("fill", "#69b3a2");
+
+  // Add a border around the chart
+  svg
+    .append("rect")
+    .attr("x", -margin.left)
+    .attr("y", -margin.top)
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .attr("fill", "none")
+    .attr("stroke-width", 5);
 };
