@@ -37,32 +37,36 @@ const visualize = (result) => {
 
   svg.append("g").call(d3.axisLeft(y));
 
-  // Add the line
-  svg
-    .append("path")
-    .datum(data)
-    .attr("fill", "none")
-    .attr("stroke", "#69b3a2")
-    .attr("stroke-width", 1.5)
-    .attr(
-      "d",
-      d3
-        .line()
-        .x((d) => x(d.step))
-        .y((d) => y(d.value))
-    );
+  // Function to add data point and line with a delay
+  const addDataPoint = (index) => {
+    // Add the point
+    svg
+      .append("circle")
+      .attr("cx", x(data[index].step))
+      .attr("cy", y(data[index].value))
+      .attr("r", 5)
+      .attr("fill", "#69b3a2");
 
-  // Add the points
-  svg
-    .append("g")
-    .selectAll("dot")
-    .data(data)
-    .enter()
-    .append("circle")
-    .attr("cx", (d) => x(d.step))
-    .attr("cy", (d) => y(d.value))
-    .attr("r", 5)
-    .attr("fill", "#69b3a2");
+    // Draw the line
+    if (index > 0) {
+      svg
+        .append("line")
+        .attr("x1", x(data[index - 1].step))
+        .attr("y1", y(data[index - 1].value))
+        .attr("x2", x(data[index].step))
+        .attr("y2", y(data[index].value))
+        .attr("stroke", "#69b3a2")
+        .attr("stroke-width", 2);
+    }
+  };
+
+  // Loop through data array and add points with delay
+  let index = 0;
+  const interval = setInterval(() => {
+    addDataPoint(index);
+    index++;
+    if (index >= data.length) clearInterval(interval);
+  }, 100);
 
   // Add a border around the chart
   svg
